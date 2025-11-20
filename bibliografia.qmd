@@ -1,0 +1,247 @@
+---
+title: "Bibliografía sobre Globalización"
+subtitle: "Referencias y recursos académicos"
+format: 
+  html:
+    toc: true
+    toc-depth: 2
+    toc-title: "Contenido"
+    page-layout: full
+    theme: cosmo
+bibliography: GLOBALIZATION.bib
+nocite: '@*'
+---
+
+::: {.hero-section}
+# 📚 Referencias Bibliográficas
+
+<p class="lead-text">
+Colección de recursos académicos sobre globalización, trabajo digital, sistemas-mundo y transformaciones sociales contemporáneas.
+</p>
+:::
+
+## 📖 Bibliografía Completa
+
+::: {#refs}
+:::
+
+---
+
+::: {.footer-section}
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-number">11</div>
+<div class="stat-label">Referencias</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-number">2006-2023</div>
+<div class="stat-label">Período</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-number">9</div>
+<div class="stat-label">Libros</div>
+</div>
+
+<div class="stat-card">
+<div class="stat-number">2</div>
+<div class="stat-label">Otros</div>
+</div>
+</div>
+
+### 🔍 Temas Principales
+
+<div class="tags">
+<span class="tag">Globalización</span>
+<span class="tag">Economía Global</span>
+<span class="tag">Sistemas-Mundo</span>
+<span class="tag">Trabajo Digital</span>
+<span class="tag">Plataformas Laborales</span>
+<span class="tag">Desigualdad</span>
+<span class="tag">Transformación Social</span>
+</div>
+:::
+
+<style>
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.hero-section h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.lead-text {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  opacity: 0.95;
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+/* Referencias */
+#refs {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+  margin: 2rem 0;
+}
+
+#refs div {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  line-height: 1.7;
+}
+
+#refs div:last-child {
+  border-bottom: none;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-number {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  opacity: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.5rem 1.2rem;
+  border-radius: 25px;
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+  font-weight: 500;
+  display: inline-block;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Footer Section */
+.footer-section {
+  background: #f9fafb;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-top: 3rem;
+}
+
+.footer-section h3 {
+  color: #374151;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  margin-bottom: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 2rem 1.5rem;
+  }
+  
+  #refs {
+    padding: 1.5rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .footer-section {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-section {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  #refs {
+    background: #1f2937;
+    color: #e5e7eb;
+  }
+  
+  #refs div {
+    border-bottom-color: #374151;
+  }
+  
+  .footer-section {
+    background: #1f2937;
+  }
+  
+  .footer-section h3 {
+    color: #e5e7eb;
+  }
+}
+
+/* Print styles */
+@media print {
+  .hero-section,
+  .stats-grid,
+  .tags,
+  .footer-section {
+    break-inside: avoid;
+  }
+  
+  .stat-card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+}
+</style>
