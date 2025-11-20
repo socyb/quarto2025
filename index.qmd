@@ -17,12 +17,13 @@ from matplotlib.patches import Circle, Rectangle
 from matplotlib.collections import LineCollection
 
 # Configurar la figura
-fig, ax = plt.subplots(figsize=(14, 10), facecolor='#0a1929')
-ax.set_xlim(0, 100)
-ax.set_ylim(0, 100)
+fig, ax = plt.subplots(figsize=(12, 8), facecolor='#0a1929')
+ax.set_xlim(-2, 102)
+ax.set_ylim(-2, 102)
 ax.set_aspect('equal')
 ax.axis('off')
 fig.patch.set_facecolor('#0a1929')
+plt.subplots_adjust(left=0, right=1, top=1, bottom=0)
 
 # Colores inspirados en Van Gogh
 color_cielo_oscuro = '#1a3a52'
