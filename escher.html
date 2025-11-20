@@ -7,6 +7,50 @@
     <link rel="stylesheet" href="https://pyscript.net/releases/2024.5.2/core.css">
     <script type="module" src="https://pyscript.net/releases/2024.5.2/core.js"></script>
     <style>
+        /* Ocultar la terminal de PyScript por defecto */
+        py-terminal {
+            position: fixed !important;
+            bottom: -300px !important;
+            left: 0 !important;
+            right: 0 !important;
+            height: 300px !important;
+            transition: bottom 0.3s ease !important;
+            z-index: 9999 !important;
+            background: rgba(0, 0, 0, 0.95) !important;
+            border-top: 2px solid #8b5cf6 !important;
+        }
+        
+        py-terminal.show {
+            bottom: 0 !important;
+        }
+        
+        #toggle-terminal {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10000;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        #toggle-terminal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+        }
+        
+        #toggle-terminal:active {
+            transform: translateY(0);
+        }
+    </style>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -94,6 +138,8 @@
         <p>Geometría Imposible en Movimiento</p>
     </div>
     
+    <button id="toggle-terminal" onclick="toggleTerminal()">🖥️ Console</button>
+    
     <div id="canvas-container">
         <svg id="escher-canvas" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet">
             <!-- El SVG será generado por PyScript -->
@@ -101,6 +147,15 @@
     </div>
     
     <div id="loading" class="loading">Cargando PyScript...</div>
+    
+    <script>
+        function toggleTerminal() {
+            const terminal = document.querySelector('py-terminal');
+            if (terminal) {
+                terminal.classList.toggle('show');
+            }
+        }
+    </script>
     
     <script type="py" terminal>
 from js import document, setInterval
