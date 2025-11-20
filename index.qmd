@@ -1,0 +1,163 @@
+---
+title: "La Noche Estrellada - Van Gogh"
+format: html
+jupyter: python3
+---
+
+## Simulación de "La Noche Estrellada" de Van Gogh
+
+Esta visualización recrea el estilo de la famosa pintura de Van Gogh usando vectores, con animación de las estrellas y el cielo.
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from matplotlib.patches import Circle, Ellipse, Rectangle
+from matplotlib.collections import LineCollection
+from IPython.display import HTML
+
+# Configurar la figura
+fig, ax = plt.subplots(figsize=(14, 10))
+ax.set_xlim(0, 100)
+ax.set_ylim(0, 100)
+ax.set_aspect('equal')
+ax.axis('off')
+
+# Colores inspirados en Van Gogh
+color_cielo_oscuro = '#1a3a52'
+color_cielo_medio = '#2d5a7b'
+color_cielo_claro = '#4a7ba7'
+color_estrella = '#ffeb3b'
+color_luna = '#ffd700'
+color_montanas = '#2c3e50'
+color_pueblo = '#34495e'
+color_cipres = '#1e3a2e'
+color_ventanas = '#f39c12'
+
+# Fondo del cielo con gradiente
+gradient_colors = [color_cielo_oscuro, color_cielo_medio, color_cielo_claro]
+for i in range(100):
+    y_pos = i
+    color_index = int(i / 33)
+    if color_index >= len(gradient_colors):
+        color_index = len(gradient_colors) - 1
+    ax.add_patch(Rectangle((0, y_pos), 100, 1, 
+                           color=gradient_colors[color_index], 
+                           alpha=0.3))
+
+# Función para crear espirales (remolinos de Van Gogh)
+def crear_espiral(cx, cy, radio, n_puntos=100, vueltas=3):
+    theta = np.linspace(0, vueltas * 2 * np.pi, n_puntos)
+    r = np.linspace(0, radio, n_puntos)
+    x = cx + r * np.cos(theta)
+    y = cy + r * np.sin(theta)
+    return x, y
+
+# Crear múltiples espirales en el cielo
+espirales = []
+posiciones_espirales = [
+    (20, 80, 8, '#4a7ba7'),
+    (50, 85, 10, '#5a8bb7'),
+    (75, 75, 7, '#4a7ba7'),
+    (35, 70, 6, '#5a8bb7'),
+    (65, 90, 9, '#6a9bc7'),
+]
+
+for cx, cy, radio, color in posiciones_espirales:
+    x, y = crear_espiral(cx, cy, radio)
+    points = np.array([x, y]).T.reshape(-1, 1, 2)
+    segments = np.concatenate([points[:-1], points[1:]], axis=1)
+    lc = LineCollection(segments, colors=color, linewidths=2, alpha=0.6)
+    ax.add_collection(lc)
+    espirales.append((x, y, color))
+
+# Montañas onduladas
+x_montana = np.linspace(0, 100, 200)
+y_montana = 25 + 8 * np.sin(x_montana * 0.1) + 3 * np.cos(x_montana * 0.15)
+ax.fill_between(x_montana, 0, y_montana, color=color_montanas, alpha=0.9)
+
+# Ciprés ondulante (árbol característico)
+cipres_x = np.array([15, 12, 10, 8, 10, 12, 15, 18, 20, 22, 20, 18])
+cipres_y = np.array([0, 15, 30, 45, 60, 70, 85, 70, 60, 45, 30, 15])
+ax.fill(cipres_x, cipres_y, color=color_cipres, alpha=0.95)
+
+# Pueblo con casitas
+casas = [
+    (30, 10, 8, 12),
+    (40, 10, 7, 10),
+    (50, 10, 9, 14),
+    (60, 10, 6, 9),
+    (70, 10, 8, 11),
+]
+
+for x, y, w, h in casas:
+    # Casa
+    ax.add_patch(Rectangle((x, y), w, h, color=color_pueblo, alpha=0.9))
+    # Techo triangular
+    techo_x = [x, x + w/2, x + w]
+    techo_y = [y + h, y + h + 4, y + h]
+    ax.fill(techo_x, techo_y, color=color_montanas, alpha=0.9)
+    # Ventanas
+    if np.random.random() > 0.3:
+        ax.add_patch(Rectangle((x + w*0.3, y + h*0.4), w*0.3, h*0.25, 
+                               color=color_ventanas, alpha=0.8))
+
+# Luna grande
+luna = Circle((85, 85), 6, color=color_luna, alpha=0.9)
+ax.add_patch(luna)
+
+# Estrellas grandes (para animar)
+estrellas_grandes = []
+posiciones_estrellas = [
+    (25, 85, 2.5),
+    (55, 90, 3),
+    (80, 78, 2.8),
+    (40, 75, 2.2),
+    (70, 92, 2.5),
+]
+
+for x, y, r in posiciones_estrellas:
+    estrella = Circle((x, y), r, color=color_estrella, alpha=0.9)
+    ax.add_patch(estrella)
+    estrellas_grandes.append(estrella)
+
+# Estrellas pequeñas
+np.random.seed(42)
+for _ in range(40):
+    x = np.random.uniform(5, 95)
+    y = np.random.uniform(50, 95)
+    r = np.random.uniform(0.3, 0.8)
+    ax.add_patch(Circle((x, y), r, color=color_estrella, alpha=0.7))
+
+# Función de animación
+def animate(frame):
+    # Animar las estrellas grandes con pulsación
+    for i, estrella in enumerate(estrellas_grandes):
+        escala = 1 + 0.3 * np.sin(frame * 0.2 + i * 0.5)
+        x, y = posiciones_estrellas[i][0], posiciones_estrellas[i][1]
+        r_base = posiciones_estrellas[i][2]
+        estrella.set_radius(r_base * escala)
+        estrella.set_alpha(0.7 + 0.2 * np.sin(frame * 0.15 + i * 0.3))
+    
+    return estrellas_grandes
+
+# Crear animación
+anim = animation.FuncAnimation(fig, animate, frames=100, 
+                              interval=50, blit=True, repeat=True)
+
+plt.tight_layout()
+plt.show()
+```
+
+## Descripción
+
+Esta recreación captura los elementos icónicos de "La noche estrellada":
+
+- **Cielo arremolinado**: Espirales que simulan los característicos remolinos de Van Gogh
+- **Estrellas pulsantes**: Animación que hace que las estrellas brillen y pulsen
+- **Luna luminosa**: En la esquina superior derecha
+- **Ciprés oscuro**: El árbol vertical característico en primer plano
+- **Pueblo tranquilo**: Casitas con ventanas iluminadas
+- **Montañas onduladas**: Al fondo del paisaje
+
+La animación añade vida a la escena, haciendo que las estrellas pulsen suavemente como si brillaran en la noche.
