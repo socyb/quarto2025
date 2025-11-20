@@ -2,6 +2,8 @@
 title: "La Noche Estrellada - Van Gogh"
 format: html
 jupyter: python3
+code-fold: true
+code-summary: "Mostrar código"
 ---
 
 ## Simulación de "La Noche Estrellada" de Van Gogh
